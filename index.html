@@ -3,428 +3,1229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI工具导航</title>
+    <title>AI 导航站 - 探索人工智能的世界</title>
     <style>
         :root {
-            --primary: #6366f1;
-            --secondary: #4f46e5;
-            --accent: #f97316;
-            --text: #1e293b;
-            --bg-light: #f8fafc;
-            --card-bg: #ffffff;
-            --card-border: #e2e8f0;
-            --hover: #eff6ff;
+            --primary: #4F46E5;
+            --primary-light: #818CF8;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --accent-light: #FBBF24;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+            --gray: #9CA3AF;
+            --gray-light: #E5E7EB;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --info: #3B82F6;
+            --white: #FFFFFF;
         }
-        
+
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
         }
-        
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text);
+            background-color: var(--light);
+            color: var(--dark);
             line-height: 1.6;
         }
-        
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-            border-radius: 0 0 2rem 2rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-        
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            padding: 50px 0 60px;
+            text-align: center;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.2);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 10.5%),
+                        radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 10.5%);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            transform: rotate(30deg);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
         h1 {
             font-size: 3rem;
-            margin-bottom: 1rem;
-            font-weight: 800;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-        
-        .subtitle {
+
+        .subheading {
             font-size: 1.2rem;
+            margin-bottom: 25px;
             opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
+
         .search-container {
-            margin: -2rem auto 2rem;
-            position: relative;
             max-width: 600px;
+            margin: 0 auto;
+            position: relative;
         }
-        
-        .search-input {
+
+        .search-box {
             width: 100%;
-            padding: 1rem 1.5rem;
-            font-size: 1.1rem;
+            padding: 16px 25px;
+            border-radius: 50px;
             border: none;
-            border-radius: 9999px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            outline: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
-        
-        .search-input:focus {
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+
+        .search-box:focus {
+            outline: none;
+            background-color: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         }
-        
-        .section {
-            margin-bottom: 3rem;
-        }
-        
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 3px solid var(--primary);
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
             color: var(--primary);
-            display: inline-block;
         }
-        
-        .cards {
+
+        main {
+            padding: 0 0 60px;
+        }
+
+        .category-container {
+            margin-bottom: 50px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--gray-light);
+            position: relative;
+        }
+
+        .category-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .category-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background-color: var(--primary);
+            color: white;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 10px rgba(79, 70, 229, 0.3);
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark);
+            flex-grow: 1;
+        }
+
+        .category-count {
+            font-size: 0.95rem;
+            color: var(--gray);
+            padding: 4px 10px;
+            border-radius: 20px;
+            background-color: var(--gray-light);
+        }
+
+        .cards-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
+            gap: 20px;
         }
-        
+
         .card {
-            background-color: var(--card-bg);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            transition: all 0.2s ease;
-            border: 1px solid var(--card-border);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            height: 100%;
+            background-color: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid var(--gray-light);
         }
-        
+
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            border-color: var(--primary);
+            border-color: var(--primary-light);
         }
-        
-        .card-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: var(--primary);
-        }
-        
-        .links {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 0.75rem;
-        }
-        
-        .link {
+
+        .card-header {
+            padding: 20px;
             display: flex;
             align-items: center;
-            padding: 0.5rem;
-            border-radius: 0.5rem;
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-            background-color: var(--bg-light);
+            border-bottom: 1px solid var(--gray-light);
         }
-        
-        .link:hover {
-            background-color: var(--hover);
-            color: var(--primary);
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            margin-right: 15px;
+            object-fit: contain;
+            background-color: var(--gray-light);
+            padding: 5px;
         }
-        
-        .link-icon {
-            width: 20px;
-            height: 20px;
-            margin-right: 8px;
+
+        .card-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--dark);
+            flex-grow: 1;
+        }
+
+        .card-badge {
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 20px;
+            margin-left: 5px;
+            background-color: var(--primary-light);
+            color: white;
+        }
+
+        .card-body {
+            padding: 15px 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 10px;
+            border-top: 1px dashed var(--gray-light);
+        }
+
+        .card-tag {
+            font-size: 0.75rem;
+            padding: 2px 8px;
             border-radius: 4px;
+            background-color: var(--gray-light);
+            color: var(--dark);
         }
-        
+
+        .card-arrow {
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .category-ai-tools .category-icon {
+            background-color: var(--primary);
+        }
+
+        .category-ai-video .category-icon {
+            background-color: var(--accent);
+        }
+
+        .category-ai-search .category-icon {
+            background-color: var(--info);
+        }
+
+        .category-ai-agent .category-icon {
+            background-color: var(--success);
+        }
+
+        .category-api .category-icon {
+            background-color: var(--warning);
+        }
+
+        .category-comfyui .category-icon {
+            background-color: var(--danger);
+        }
+
         footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 30px 0;
             text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-            color: #64748b;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .copyright {
+            color: var(--gray);
             font-size: 0.9rem;
         }
-        
-        .highlight {
-            color: var(--accent);
-            font-weight: 600;
-        }
-        
-        /* 响应式调整 */
+
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
-            
-            .cards {
-                grid-template-columns: 1fr;
+
+            .category-header {
+                margin-bottom: 15px;
             }
-            
-            .links {
-                grid-template-columns: 1fr 1fr;
+
+            .category-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+
+            .category-title {
+                font-size: 1.3rem;
+            }
+
+            .cards-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+
+            .footer-links {
+                gap: 15px;
             }
         }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .subheading {
+                font-size: 1rem;
+            }
+
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .category-container {
+            animation: fadeInUp 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        .category-container:nth-child(1) { animation-delay: 0.1s; }
+        .category-container:nth-child(2) { animation-delay: 0.2s; }
+        .category-container:nth-child(3) { animation-delay: 0.3s; }
+        .category-container:nth-child(4) { animation-delay: 0.4s; }
+        .category-container:nth-child(5) { animation-delay: 0.5s; }
+        .category-container:nth-child(6) { animation-delay: 0.6s; }
+
+        .back-to-top {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-5px);
+        }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
-        <h1>AI工具导航</h1>
-        <p class="subtitle">收集整理各类人工智能工具，提升你的工作效率与创造力</p>
-    </header>
-    
-    <div class="container">
-        <div class="search-container">
-            <input type="text" id="search" class="search-input" placeholder="搜索AI工具..." onkeyup="filterTools()">
-        </div>
-        
-        <div class="section">
-            <h2 class="section-title">AI工具</h2>
-            <div class="cards">
-                <div class="card" data-keywords="chatgpt openai 聊天 对话 ai助手">
-                    <h3 class="card-title">AI聊天助手</h3>
-                    <div class="links">
-                        <a href="https://node2.chatshare.biz/list" class="link" target="_blank">
-                            <img src="https://node2.chatshare.biz/favicon.ico" class="link-icon" alt="ChatGPT">
-                            ChatGPT
-                        </a>
-                        <a href="https://chat.deepseek.com/" class="link" target="_blank">
-                            <img src="https://chat.deepseek.com/favicon.ico" class="link-icon" alt="DeepSeek">
-                            DeepSeek
-                        </a>
-                        <a href="https://aistudio.google.com/prompts/new_chat" class="link" target="_blank">
-                            <img src="https://aistudio.google.com/favicon.ico" class="link-icon" alt="Gemini">
-                            Gemini
-                        </a>
-                        <a href="https://poe.com/Claude-3.5-Sonnet" class="link" target="_blank">
-                            <img src="https://poe.com/favicon.ico" class="link-icon" alt="Poe">
-                            Poe
-                        </a>
-                        <a href="https://grok.com/" class="link" target="_blank">
-                            <img src="https://grok.com/favicon.ico" class="link-icon" alt="Grok">
-                            Grok
-                        </a>
-                        <a href="https://www.doubao.com/chat/" class="link" target="_blank">
-                            <img src="https://www.doubao.com/favicon.ico" class="link-icon" alt="豆包">
-                            豆包
-                        </a>
-                        <a href="https://manus.im/app" class="link" target="_blank">
-                            <img src="https://manus.im/favicon.ico" class="link-icon" alt="马努斯">
-                            马努斯
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="card" data-keywords="ai搜索 perplexity 秘塔 纳米 搜索引擎">
-                    <h3 class="card-title">AI搜索引擎</h3>
-                    <div class="links">
-                        <a href="https://www.perplexity.ai/" class="link" target="_blank">
-                            <img src="https://www.perplexity.ai/favicon.ico" class="link-icon" alt="Perplexity">
-                            Perplexity
-                        </a>
-                        <a href="https://metaso.cn/" class="link" target="_blank">
-                            <img src="https://metaso.cn/favicon.ico" class="link-icon" alt="秘塔搜索">
-                            秘塔搜索
-                        </a>
-                        <a href="https://www.n.cn/" class="link" target="_blank">
-                            <img src="https://www.n.cn/favicon.ico" class="link-icon" alt="纳米搜索">
-                            纳米搜索
-                        </a>
-                        <a href="https://app.tavily.com/home" class="link" target="_blank">
-                            <img src="https://app.tavily.com/favicon.ico" class="link-icon" alt="Tavily">
-                            Tavily
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="card" data-keywords="ai视频生成 视频 runway pika jimeng hailuoai 即梦">
-                    <h3 class="card-title">AI视频生成</h3>
-                    <div class="links">
-                        <a href="https://app.runwayml.com/video-tools/teams/wgy3562631237/dashboard" class="link" target="_blank">
-                            <img src="https://app.runwayml.com/favicon.ico" class="link-icon" alt="Runway">
-                            Runway
-                        </a>
-                        <a href="https://pika.art/" class="link" target="_blank">
-                            <img src="https://pika.art/favicon.ico" class="link-icon" alt="Pika">
-                            Pika
-                        </a>
-                        <a href="https://jimeng.jianying.com/ai-tool/home" class="link" target="_blank">
-                            <img src="https://jimeng.jianying.com/favicon.ico" class="link-icon" alt="即梦AI">
-                            即梦AI
-                        </a>
-                        <a href="https://hailuoai.video/" class="link" target="_blank">
-                            <img src="https://hailuoai.video/favicon.ico" class="link-icon" alt="Hailuo">
-                            Hailuo
-                        </a>
-                        <a href="https://www.vidu.studio/zh/create/character2video" class="link" target="_blank">
-                            <img src="https://www.vidu.studio/favicon.ico" class="link-icon" alt="Vidu">
-                            Vidu
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="card" data-keywords="ai创作 文档 notebooklm gamma canva 效率 通义">
-                    <h3 class="card-title">AI创作与效率工具</h3>
-                    <div class="links">
-                        <a href="https://notebooklm.google.com/" class="link" target="_blank">
-                            <img src="https://notebooklm.google.com/favicon.ico" class="link-icon" alt="NotebookLM">
-                            NotebookLM
-                        </a>
-                        <a href="https://gamma.app/" class="link" target="_blank">
-                            <img src="https://gamma.app/favicon.ico" class="link-icon" alt="Gamma">
-                            Gamma
-                        </a>
-                        <a href="https://www.canva.com/" class="link" target="_blank">
-                            <img src="https://www.canva.com/favicon.ico" class="link-icon" alt="Canva">
-                            Canva
-                        </a>
-                        <a href="https://tongyi.aliyun.com/efficiency/" class="link" target="_blank">
-                            <img src="https://tongyi.aliyun.com/favicon.ico" class="link-icon" alt="通义效率">
-                            通义效率
-                        </a>
-                        <a href="https://yuanbao.tencent.com/chat/naQivTmsDa" class="link" target="_blank">
-                            <img src="https://yuanbao.tencent.com/favicon.ico" class="link-icon" alt="腾讯元宝">
-                            腾讯元宝
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="card" data-keywords="ai agent coze 智能代理 dify fastgpt 代理">
-                    <h3 class="card-title">AI Agent</h3>
-                    <div class="links">
-                        <a href="https://www.coze.com/home" class="link" target="_blank">
-                            <img src="https://www.coze.com/favicon.ico" class="link-icon" alt="Coze">
-                            Coze
-                        </a>
-                        <a href="https://cloud.dify.ai/apps?category=workflow" class="link" target="_blank">
-                            <img src="https://cloud.dify.ai/favicon.ico" class="link-icon" alt="Dify">
-                            Dify
-                        </a>
-                        <a href="https://cloud.tryfastgpt.ai/app/list?type=advanced" class="link" target="_blank">
-                            <img src="https://cloud.tryfastgpt.ai/favicon.ico" class="link-icon" alt="FastGPT">
-                            FastGPT
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="card" data-keywords="comfyui sd stable diffusion liblib comflowy 端脑云 揽睿 civitai 姿势 动作">
-                    <h3 class="card-title">ComfyUI & 绘画工具</h3>
-                    <div class="links">
-                        <a href="https://app.comflowy.com/personal" class="link" target="_blank">
-                            <img src="https://app.comflowy.com/favicon.ico" class="link-icon" alt="Comflowy">
-                            Comflowy
-                        </a>
-                        <a href="https://www.liblib.art/" class="link" target="_blank">
-                            <img src="https://www.liblib.art/favicon.ico" class="link-icon" alt="LiblibAI">
-                            LiblibAI
-                        </a>
-                        <a href="https://cephalon.cloud/aigc" class="link" target="_blank">
-                            <img src="https://cephalon.cloud/favicon.ico" class="link-icon" alt="端脑云">
-                            端脑云
-                        </a>
-                        <a href="https://lanrui.co/application/appLauncher" class="link" target="_blank">
-                            <img src="https://lanrui.co/favicon.ico" class="link-icon" alt="揽睿星舟">
-                            揽睿星舟
-                        </a>
-                        <a href="https://civitai.com/images" class="link" target="_blank">
-                            <img src="https://civitai.com/favicon.ico" class="link-icon" alt="Civitai">
-                            Civitai
-                        </a>
-                        <a href="https://posemy.art/app/" class="link" target="_blank">
-                            <img src="https://posemy.art/favicon.ico" class="link-icon" alt="PoseMy">
-                            PoseMy
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="card" data-keywords="api 集成 302.ai siliconflow 火山方舟 阿里云 腾讯云 有道智云 书虫 wildcard">
-                    <h3 class="card-title">API集成服务</h3>
-                    <div class="links">
-                        <a href="https://dash.302.ai/dashboard/overview" class="link" target="_blank">
-                            <img src="https://dash.302.ai/favicon.ico" class="link-icon" alt="302.AI">
-                            302.AI
-                        </a>
-                        <a href="https://cloud.siliconflow.cn/models" class="link" target="_blank">
-                            <img src="https://cloud.siliconflow.cn/favicon.ico" class="link-icon" alt="SiliconCloud">
-                            SiliconCloud
-                        </a>
-                        <a href="https://shuchong.xyz/dashboard" class="link" target="_blank">
-                            <img src="https://shuchong.xyz/favicon.ico" class="link-icon" alt="书虫高速">
-                            书虫高速
-                        </a>
-                        <a href="https://cn.aliyun.com/" class="link" target="_blank">
-                            <img src="https://cn.aliyun.com/favicon.ico" class="link-icon" alt="阿里云">
-                            阿里云
-                        </a>
-                        <a href="https://cloud.tencent.com/" class="link" target="_blank">
-                            <img src="https://cloud.tencent.com/favicon.ico" class="link-icon" alt="腾讯云">
-                            腾讯云
-                        </a>
-                        <a href="https://bewildcard.com/record" class="link" target="_blank">
-                            <img src="https://bewildcard.com/favicon.ico" class="link-icon" alt="WildCard">
-                            WildCard
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="card" data-keywords="ai音频 音乐生成 suno">
-                    <h3 class="card-title">AI音频与音乐</h3>
-                    <div class="links">
-                        <a href="https://suno.com/create" class="link" target="_blank">
-                            <img src="https://suno.com/favicon.ico" class="link-icon" alt="Suno">
-                            Suno
-                        </a>
-                    </div>
-                </div>
+        <div class="header-content">
+            <h1>AI 导航站</h1>
+            <p class="subheading">探索人工智能的未来，发现最前沿的AI工具与资源</p>
+            <div class="search-container">
+                <input type="text" class="search-box" placeholder="搜索AI工具、平台或资源...">
+                <i class="fas fa-search search-icon"></i>
             </div>
         </div>
-    </div>
-    
+    </header>
+
+    <main class="container">
+        <!-- AI工具 -->
+        <section class="category-container category-ai-tools">
+            <div class="category-header">
+                <div class="category-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h2 class="category-title">AI工具</h2>
+                <span class="category-count">10+</span>
+            </div>
+            <div class="cards-container">
+                <a href="https://node2.chatshare.biz/list" class="card">
+                    <div class="card-header">
+                        <img src="https://node2.chatshare.biz/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">ChatGPT</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">OpenAI开发的对话式人工智能模型，能够理解和生成自然语言。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">对话助手</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://chat.deepseek.com/" class="card">
+                    <div class="card-header">
+                        <img src="https://chat.deepseek.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">DeepSeek</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">中国自研大语言模型，擅长中文处理和代码生成。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">大语言模型</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://aistudio.google.com/prompts/new_chat" class="card">
+                    <div class="card-header">
+                        <img src="https://aistudio.google.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Gemini</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">Google开发的多模态AI模型，支持文本、图像和音频输入。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">谷歌AI</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://poe.com/Claude-3.5-Sonnet" class="card">
+                    <div class="card-header">
+                        <img src="https://poe.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Poe</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">集成多种AI模型的聊天平台，包括Claude、GPT等。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">AI聚合平台</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://notebooklm.google.com/" class="card">
+                    <div class="card-header">
+                        <img src="https://notebooklm.google.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">NotebookLM</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">Google推出的AI笔记工具，能够理解和组织文档内容。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">文档助手</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://gamma.app/" class="card">
+                    <div class="card-header">
+                        <img src="https://gamma.app/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Gamma</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">AI驱动的演示文稿创建工具，快速生成精美PPT。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">PPT工具</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.canva.com/" class="card">
+                    <div class="card-header">
+                        <img src="https://www.canva.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Canva</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">集成了多种AI功能的设计平台，帮助创建海报、PPT等设计内容。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">AI设计</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://tongyi.aliyun.com/efficiency/" class="card">
+                    <div class="card-header">
+                        <img src="https://tongyi.aliyun.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">通义效率</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">阿里巴巴推出的AI效率办公平台，集成了多种文档处理功能。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">办公助手</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://yuanbao.tencent.com/chat/naQivTmsDa" class="card">
+                    <div class="card-header">
+                        <img src="https://yuanbao.tencent.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">腾讯元宝</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">腾讯开发的AI助手，提供创作、翻译和信息查询等多种功能。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">腾讯AI</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://grok.com/" class="card">
+                    <div class="card-header">
+                        <img src="https://grok.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Grok</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">X公司(前Twitter)推出的AI助手，以幽默和个性化回答著称。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">对话助手</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://manus.im/app" class="card">
+                    <div class="card-header">
+                        <img src="https://manus.im/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">马努斯</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">基于通义大模型的AI助手，提供知识问答和内容创作功能。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">国产AI</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://www.doubao.com/chat/" class="card">
+                    <div class="card-header">
+                        <img src="https://www.doubao.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">豆包</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">字节跳动推出的AI助手，基于自研大语言模型，擅长中文交互。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">字节AI</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- AI视频 -->
+        <section class="category-container category-ai-video">
+            <div class="category-header">
+                <div class="category-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h2 class="category-title">AI视频</h2>
+                <span class="category-count">4</span>
+            </div>
+            <div class="cards-container">
+                <a href="https://hailuoai.video/" class="card">
+                    <div class="card-header">
+                        <img src="https://hailuoai.video/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Hailuo AI</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">文本到视频生成工具，可以根据文本描述创建高质量的视频内容。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">文本生成视频</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://jimeng.jianying.com/ai-tool/home" class="card">
+                    <div class="card-header">
+                        <img src="https://jimeng.jianying.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">即梦AI</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">剪映旗下的AI视频创作工具，提供一键生成视频和视频编辑功能。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">视频创作</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://app.runwayml.com/video-tools/teams/wgy3562631237/dashboard" class="card">
+                    <div class="card-header">
+                        <img src="https://app.runwayml.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Runway</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">领先的AI视频生成和编辑平台，提供多种创意工具。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">视频生成</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://pika.art/" class="card">
+                    <div class="card-header">
+                        <img src="https://pika.art/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Pika</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">先进的AI视频生成工具，可从文本、图像创建高质量视频。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">创意视频</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://www.vidu.studio/zh/create/character2video" class="card">
+                    <div class="card-header">
+                        <img src="https://www.vidu.studio/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Vidu AI</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">人物角色到视频的生成工具，可创建真人说话视频。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">人物视频</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- AI搜索 -->
+        <section class="category-container category-ai-search">
+            <div class="category-header">
+                <div class="category-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h2 class="category-title">AI搜索</h2>
+                <span class="category-count">4</span>
+            </div>
+            <div class="cards-container">
+                <a href="https://metaso.cn/" class="card">
+                    <div class="card-header">
+                        <img src="https://metaso.cn/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">秘塔AI搜索</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">中国开发的AI搜索引擎，提供智能总结和知识整合功能。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">AI搜索</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.perplexity.ai/" class="card">
+                    <div class="card-header">
+                        <img src="https://www.perplexity.ai/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Perplexity</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">AI驱动的问答搜索引擎，能够提供带有引用的详细回答。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">问答引擎</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.n.cn/" class="card">
+                    <div class="card-header">
+                        <img src="https://www.n.cn/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">纳米AI搜索</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">中文AI搜索引擎，提供智能搜索和总结功能。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">中文搜索</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://app.tavily.com/home" class="card">
+                    <div class="card-header">
+                        <img src="https://app.tavily.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Tavily</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">专为开发者设计的AI搜索引擎，提供API接口和高精度搜索。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">AI搜索API</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- AI Agent -->
+        <section class="category-container category-ai-agent">
+            <div class="category-header">
+                <div class="category-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h2 class="category-title">AI Agent</h2>
+                <span class="category-count">3</span>
+            </div>
+            <div class="cards-container">
+                <a href="https://www.coze.com/home" class="card">
+                    <div class="card-header">
+                        <img src="https://www.coze.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Coze</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">字节跳动推出的AI Agent构建平台，低代码创建自定义AI应用。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">Agent构建</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://cloud.dify.ai/apps?category=workflow" class="card">
+                    <div class="card-header">
+                        <img src="https://cloud.dify.ai/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Dify</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">开源的AI应用开发平台，支持构建自定义AI应用和工作流。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">开源平台</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://cloud.tryfastgpt.ai/app/list?type=advanced" class="card">
+                    <div class="card-header">
+                        <img src="https://cloud.tryfastgpt.ai/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">FastGPT</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">快速构建AI应用的平台，支持知识库和多模型集成。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">知识库</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- API集成 -->
+        <section class="category-container category-api">
+            <div class="category-header">
+                <div class="category-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h2 class="category-title">API集成</h2>
+                <span class="category-count">10</span>
+            </div>
+            <div class="cards-container">
+                <a href="https://dash.302.ai/dashboard/overview" class="card">
+                    <div class="card-header">
+                        <img src="https://dash.302.ai/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">302.AI</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">AI API服务平台，提供多种模型接口和管理功能。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">API平台</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://cloud.siliconflow.cn/models" class="card">
+                    <div class="card-header">
+                        <img src="https://cloud.siliconflow.cn/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">SiliconCloud</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">AI计算平台，提供GPU算力和模型服务。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">GPU云</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://console.volcengine.com/ark/region:ark+cn-beijing/experience/chat" class="card">
+                    <div class="card-header">
+                        <img src="https://console.volcengine.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">火山方舟</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">字节跳动提供的AI大模型平台，提供API接口和应用开发。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">AI平台</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://shuchong.xyz/dashboard" class="card">
+                    <div class="card-header">
+                        <img src="https://shuchong.xyz/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">书虫API</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">AI API中转服务，支持多种大模型接口整合。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">API中转</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://cloud.tencent.com/" class="card">
+                    <div class="card-header">
+                        <img src="https://cloud.tencent.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">腾讯云</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">腾讯云计算服务，提供AI APIs和云服务。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">云计算</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://cn.aliyun.com/" class="card">
+                    <div class="card-header">
+                        <img src="https://cn.aliyun.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">阿里云</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">阿里巴巴的云计算平台，提供AI服务和API接口。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">云服务</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://ai.youdao.com/console/#/app-overview" class="card">
+                    <div class="card-header">
+                        <img src="https://ai.youdao.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">有道智云</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">网易有道提供的AI API服务，包括翻译、OCR等功能。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">AI API</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://bewildcard.com/record" class="card">
+                    <div class="card-header">
+                        <img src="https://bewildcard.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">WildCard</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">虚拟信用卡服务，用于AI服务和国际软件订阅。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">支付工具</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://platform.deepseek.com/usage" class="card">
+                    <div class="card-header">
+                        <img src="https://platform.deepseek.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">DeepSeek平台</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">DeepSeek大模型API服务平台，提供多种模型接口。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">大模型API</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://console.x.ai/team/963dbb2f-aa9c-470a-b6a4-c70cdc921173/models?cluster=us-east-1" class="card">
+                    <div class="card-header">
+                        <img src="https://console.x.ai/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Grok API</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">X公司提供的Grok大模型API服务。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">Grok API</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://openrouter.ai/settings/credits" class="card">
+                    <div class="card-header">
+                        <img src="https://openrouter.ai/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">OpenRouter</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">多模型API聚合服务，提供统一接口访问多种AI模型。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">API聚合</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ComfyUI -->
+        <section class="category-container category-comfyui">
+            <div class="category-header">
+                <div class="category-icon">
+                    <i class="fas fa-image"></i>
+                </div>
+                <h2 class="category-title">ComfyUI与AI图像</h2>
+                <span class="category-count">8</span>
+            </div>
+            <div class="cards-container">
+                <a href="https://cephalon.cloud/aigc" class="card">
+                    <div class="card-header">
+                        <img src="https://cephalon.cloud/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Cephalon Cloud</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">端脑云，提供ComfyUI云端服务和GPU算力。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">云端ComfyUI</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.liblib.art/" class="card">
+                    <div class="card-header">
+                        <img src="https://www.liblib.art/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">LiblibAI</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">AI绘画平台，支持多种模型和风格，有免费额度。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">AI绘画</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://app.comflowy.com/personal" class="card">
+                    <div class="card-header">
+                        <img src="https://app.comflowy.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Comflowy</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">简化版ComfyUI服务，更易于使用的界面和预设。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">ComfyUI</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://lanrui.co/application/appLauncher" class="card">
+                    <div class="card-header">
+                        <img src="https://lanrui.co/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">揽睿星舟</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">云端GPU平台，提供ComfyUI和Stable Diffusion等服务。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">云GPU</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://civitai.com/images" class="card">
+                    <div class="card-header">
+                        <img src="https://civitai.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Civitai</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">AI艺术社区，提供模型、提示词和图像示例。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">模型社区</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://huggingface.co/spaces/fancyfeast/joy-caption-alpha-two" class="card">
+                    <div class="card-header">
+                        <img src="https://huggingface.co/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Joy Caption</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">AI图像反向提示词工具，从图像推断生成提示词。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">反推提示词</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://posemy.art/app/" class="card">
+                    <div class="card-header">
+                        <img src="https://posemy.art/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">PoseMy.Art</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">AI姿势参考工具，用于创建人物姿势和动作。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">姿势工具</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://openart.ai/workflows/all" class="card">
+                    <div class="card-header">
+                        <img src="https://openart.ai/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">OpenArt工作流</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">ComfyUI工作流分享平台，提供各种预设工作流。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">工作流</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://comfyworkflows.com/" class="card">
+                    <div class="card-header">
+                        <img src="https://comfyworkflows.com/favicon.ico" onerror="this.src='https://via.placeholder.com/40';this.onerror='';" class="card-icon">
+                        <h3 class="card-title">Comfy Workflows</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">ComfyUI工作流收集站，提供各种高质量预设。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">工作流分享</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 其他工具 -->
+        <section class="category-container">
+            <div class="category-header">
+                <div class="category-icon" style="background-color: #EF4444;">
+                    <i class="fas fa-music"></i>
+                </div>
+                <h2 class="category-title">AI音频</h2>
+                <span class="category-count">1</span>
+            </div>
+            <div class="cards-container">
+                <a href="https://suno.com/create" class="card">
+                    <div class="card-header">
+                        <img src="https://suno.com/favicon.ico" class="card-icon" onerror="this.src='https://via.placeholder.com/40';this.onerror='';">
+                        <h3 class="card-title">Suno</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">AI音乐生成工具，可通过文本描述创建高质量音乐。</p>
+                        <div class="card-footer">
+                            <span class="card-tag">AI音乐</span>
+                            <i class="fas fa-arrow-right card-arrow"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
     <footer>
-        <p>收集整理了 <span class="highlight">35+</span> 个实用AI工具 | 2025年更新</p>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">关于我们</a>
+                <a href="#">推荐提交</a>
+                <a href="#">联系方式</a>
+                <a href="#">使用条款</a>
+                <a href="#">隐私政策</a>
+            </div>
+            <div class="copyright">
+                © 2025 AI导航站 - 探索人工智能的世界
+            </div>
+        </div>
     </footer>
 
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
     <script>
-        function filterTools() {
-            const searchTerm = document.getElementById('search').value.toLowerCase();
-            const cards = document.querySelectorAll('.card');
+        // 搜索功能
+        const searchBox = document.querySelector('.search-box');
+        const cards = document.querySelectorAll('.card');
+
+        searchBox.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
             
             cards.forEach(card => {
-                const keywords = card.getAttribute('data-keywords').toLowerCase();
                 const title = card.querySelector('.card-title').textContent.toLowerCase();
-                const links = Array.from(card.querySelectorAll('.link')).map(link => link.textContent.toLowerCase()).join(' ');
+                const description = card.querySelector('.card-description').textContent.toLowerCase();
+                const tag = card.querySelector('.card-tag').textContent.toLowerCase();
                 
-                if (keywords.includes(searchTerm) || title.includes(searchTerm) || links.includes(searchTerm)) {
-                    card.style.display = 'block';
+                if (title.includes(searchTerm) || description.includes(searchTerm) || tag.includes(searchTerm)) {
+                    card.style.display = '';
                 } else {
                     card.style.display = 'none';
                 }
             });
-        }
-        
-        // 尝试加载favicon
-        document.addEventListener('DOMContentLoaded', function() {
-            const links = document.querySelectorAll('.link-icon');
-            
-            links.forEach(link => {
-                link.onerror = function() {
-                    this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%236366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Cpath d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"%3E%3C/path%3E%3Cpath d="M3.27 6.96L12 12.01l8.73-5.05"%3E%3C/path%3E%3Cpath d="M12 22.08V12"%3E%3C/path%3E%3C/svg%3E';
-                };
+
+            // 隐藏空分类
+            document.querySelectorAll('.category-container').forEach(category => {
+                const visibleCards = category.querySelectorAll('.card[style=""]').length;
+                category.style.display = visibleCards > 0 ? '' : 'none';
+            });
+        });
+
+        // 返回顶部按钮
+        const backToTopButton = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 检查图标加载错误
+        document.querySelectorAll('.card-icon').forEach(icon => {
+            icon.addEventListener('error', function() {
+                const firstLetter = this.closest('.card').querySelector('.card-title').textContent[0];
+                this.src = `https://ui-avatars.com/api/?name=${firstLetter}&background=random&color=fff&size=40`;
             });
         });
     </script>
